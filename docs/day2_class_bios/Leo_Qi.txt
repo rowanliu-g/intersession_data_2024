@@ -1,0 +1,3 @@
+Name: Leo Qi
+Year: Freshman
+Bio: I'm from Vancouver, Canada and I intend to major in CS and neuroscience.
