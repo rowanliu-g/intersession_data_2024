@@ -1,0 +1,3 @@
+Name: Daniel Yao
+Year: 1st-year BME
+Bio: I'm interested in biomedical data science. In my free time, I like to take very long naps.
