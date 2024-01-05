@@ -1,0 +1,3 @@
+Name: Kiron Deb
+Year: 3rd year BS in CS
+Bio: I'm interested in full-stack software engineering
