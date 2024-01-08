@@ -1,69 +1,62 @@
 #### SETUP ####
+getwd()
+setwd('/Users/lylaatta/Documents/GitHub/intersession_data_2024/code/day3_plotting/')
 library(datasets)
-## see more data sets at https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html
 library(viridis)
 
-getwd()
-setwd('/Users/lylaatta/Documents/GitHub/intersession_data_2023/week1/code_day3')
-
-#### DATA ####
 data("iris")
 
-head(iris)
+#### DATA ####
 class(iris)
+dim(iris)
+head(iris)
+summary(iris)
 
 #### PLOTTING ####
-## plot sepal characteristics 
-# png('iris1.png', width = 520, height = 520)
-par(mfrow = c(1,1))
-plot(iris$Sepal.Length, iris$Sepal.Width, pch = 16, cex = 2, bty = 'n',
-     main = 'Sepal Characteristics', xlab = 'Sepal Length (cm)', ylab = 'Sepal Width (cm)')
-# dev.off()
 
-## plot petal chars
-plot(iris$Petal.Length, iris$Petal.Width, pch = 16, cex = 0.7, bty = 'n',
-     main = 'Petal Characteristics', xlab = 'Petal Length (cm)', ylab = 'Petal Width (cm)')
+## plot histogram of Sepal Lengths
+hist(iris$Sepal.Length, breaks = 30)
 
-## plot side by side 
-png('iris2.png', width = 600, height = 300)
+## plot Sepal Width vs Length
+plot(iris$Sepal.Length, iris$Sepal.Width, pch = 16, cex = 1.5, col = 'blue')
+
+## plot sepal and petal characteristics side by side
 par(mfrow = c(1,2))
-plot(iris$Sepal.Length, iris$Sepal.Width, pch = 16, cex = 0.7, bty = 'n',
-     main = 'Sepal Characteristics', xlab = 'Sepal Length (cm)', ylab = 'Sepal Width (cm)')
-plot(iris$Petal.Length, iris$Petal.Width, pch = 16, cex = 0.7, bty = 'n',
-     main = 'Petal Characteristics', xlab = 'Petal Length (cm)', ylab = 'Petal Width (cm)')
-dev.off()
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     pch = 16, cex = 1.5, col = 'blue',
+     main = 'Iris Sepal Characteristics', 
+     xlab = 'Sepal Length (cm)', ylab = 'Sepal Width (cm)')
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = 16, cex = 1.5, col = 'blue',
+     main = 'Iris Petal Characteristics', 
+     xlab = 'Petal Length (cm)', ylab = 'Petal Width (cm)')
 
-## species 
-head(iris$Species)
-unique(iris$Species)
 
+## color by species and make color legend 
+#viridis color for each unique species
 col.species.unique <- viridis::viridis(length(unique(iris$Species)))
-cols.species <- col.species.unique[as.factor(iris$Species)]
+names(col.species.unique) <- unique(iris$Species)
 
-table(iris$Species)
-table(cols.species)
+#make species color character vector in same order as species in data 
+col.idx <- match(iris$Species, names(col.species.unique))
+col.species <- col.species.unique[col.idx]
 
-png('iris3.png', width = 600, height = 300)
+png('iris_characteristics.png', width = 1000, height = 580) ## save figure
+
 par(mfrow = c(1,2))
-plot(iris$Sepal.Length, iris$Sepal.Width, pch = 16, cex = 0.7, bty = 'n', col = cols.species,
-     main = 'Sepal Characteristics', xlab = 'Sepal Length (cm)', ylab = 'Sepal Width (cm)')
-plot(iris$Petal.Length, iris$Petal.Width, pch = 16, cex = 0.7, bty = 'n', col  = cols.species,
-     main = 'Petal Characteristics', xlab = 'Petal Length (cm)', ylab = 'Petal Width (cm)')
-
-legend.lab <- unique(iris$Species)
-legend.col <- unique(cols.species)
-
-legend(x=4,y=0.9, legend = legend.lab, col = legend.col, pch = 16)
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     pch = 16, cex = 1.5, col = col.species,
+     main = 'Iris Sepal Characteristics', 
+     xlab = 'Sepal Length (cm)', ylab = 'Sepal Width (cm)')
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = 16, cex = 1.5, col = col.species,
+     main = 'Iris Petal Characteristics', 
+     xlab = 'Petal Length (cm)', ylab = 'Petal Width (cm)')
+## add legend to second plot
+legend(x = 1, y = 2.5, 
+       legend = names(col.species.unique),
+       col = col.species.unique, pch = 16)
 
 dev.off()
 
-##make legend 
 
-
-par(mfrow = c(3,1))
-hist(iris$Petal.Length[iris$Species=='setosa'])
-hist(iris$Petal.Length[iris$Species=='versicolor'])
-hist(iris$Petal.Length[iris$Species=='virginica'])
-
-
-###
