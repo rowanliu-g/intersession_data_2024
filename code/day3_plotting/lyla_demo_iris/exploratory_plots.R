@@ -1,6 +1,6 @@
 #### SETUP ####
 getwd()
-setwd('/Users/lylaatta/Documents/GitHub/intersession_data_2024/code/day3_plotting/')
+setwd('/Users/lylaatta/Documents/GitHub/intersession_data_2024/code/day3_plotting/lyla_demo_iris/')
 library(datasets)
 library(viridis)
 
@@ -15,7 +15,9 @@ summary(iris)
 #### PLOTTING ####
 
 ## plot histogram of Sepal Lengths
-hist(iris$Sepal.Length, breaks = 30)
+par(mfrow = c(1,1))
+hist(iris$Sepal.Length, breaks = 30, 
+     main = 'Iris Flower Sepal Lengths', xlab = 'Sepal Length (cm)', ylab = 'Count')
 
 ## plot Sepal Width vs Length
 plot(iris$Sepal.Length, iris$Sepal.Width, pch = 16, cex = 1.5, col = 'blue')
@@ -56,7 +58,6 @@ plot(iris$Petal.Length, iris$Petal.Width,
 legend(x = 1, y = 2.5, 
        legend = names(col.species.unique),
        col = col.species.unique, pch = 16)
-
 dev.off()
 
 
