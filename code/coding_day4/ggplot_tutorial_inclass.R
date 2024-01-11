@@ -53,3 +53,6 @@ summary(mpg)
 
 
 
+
+##load new data
+growth <- read.csv('https://raw.githubusercontent.com/kpclifton/intersession_data_2023/main/code/day4/cyanobacteria_growth.csv')
