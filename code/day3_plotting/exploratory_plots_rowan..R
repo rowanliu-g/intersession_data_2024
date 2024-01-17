@@ -55,6 +55,7 @@ plot(iris$Petal.Length, iris$Petal.Width, pch = 16, cex = 0.75, col = "blue",
 
 ### Color by Species ###
 col.species.unique <- viridis::viridis(3)
+col.species.unique
 
 par(mfrow = c(1,1))
 plot(iris[,c(1,2)], pch = 16, cex = 0.75, col = col.species.unique,
@@ -62,6 +63,7 @@ plot(iris[,c(1,2)], pch = 16, cex = 0.75, col = col.species.unique,
      main = "Iris Sepal Characteristics")
 
 col.species <- col.species.unique[as.factor(iris$Species)]
+col.species
 head(as.factor(iris$Species))
 head(as.numeric(as.factor(iris$Species)))
 tail(as.numeric(as.factor(iris$Species)))
@@ -70,6 +72,7 @@ tail(col.species)
 
 #Legend
 col.idx <- match(iris$Species, names(col.species.unique))
+col.idx 
 col.species <- col.species.unique[col.idx]
 
 png('iris_characteristics.png', width = 1000, height = 580) ## save figure
@@ -84,8 +87,8 @@ plot(iris$Petal.Length, iris$Petal.Width,
      main = 'Iris Petal Characteristics', 
      xlab = 'Petal Length (cm)', ylab = 'Petal Width (cm)')
 ## add legend to second plot
-legend(x = 1, y = 2.5, 
-       legend = names(col.species.unique),
+legend(x = "topleft", 
+       legend = c(col.species.unique),
        col = col.species.unique, pch = 16)
 
 dev.off()
