@@ -65,3 +65,4 @@ legend("bottomright",
        legend = paste("Tree", names(col.trees.unique)),
        col = col.trees.unique, pch = 19)
 #dev.off()
+
